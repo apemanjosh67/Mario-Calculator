@@ -2,7 +2,9 @@ package com.example.mariocalculator.ui.theme
 
 import android.widget.TextView
 
-class CalcDisplay {
+class Display {
+
+    //
     lateinit var textView: TextView;
 
     public fun init(newTextView: TextView) {

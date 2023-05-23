@@ -1,46 +1,77 @@
 package com.example.mariocalculator
 
 import android.graphics.Color
-import android.view.View
-import android.view.View.TEXT_ALIGNMENT_CENTER
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import com.example.mariocalculator.ui.theme.CalcDisplay
+import com.example.mariocalculator.ui.theme.Display
 
-class CalcBtn {
+class Button {
 
-    //instance variables
-    lateinit var layout: LinearLayout;
-    var color = "#aaaaff"
-    var downColor = "#6666ff"
-    var btnDown = false;
-    var textVal = "";
-    lateinit var textbox: TextView;
-    lateinit var display: CalcDisplay;
+    /*** INSTANCE VARIABLES ***/
 
-    public fun initLayout(activity: ComponentActivity) {
-        layout = LinearLayout(activity)
+    //Object variables
+    private lateinit var layout: LinearLayout;
+    private lateinit var textbox: TextView;
+    private lateinit var display: Display;
+
+    //Button aesthetic variables
+    private var color = "#aaaaff"
+    private var downColor = "#6666ff"
+    private var border = 4;
+
+    //Button click variables
+    private var btnDown = false;
+
+
+    /*** INITIALIZATION ***/
+
+    //Constructor, given all properties
+    constructor(activity: ComponentActivity, x: Int, y: Int, width: Int, height: Int, text: String) {
+        //Set up LinearLayout
+        layout = LinearLayout(activity);
         layout.setOnClickListener{buttonClick()};
 
+        //Set up TextView inside LinearLayout
         textbox = TextView(activity);
-        //textbox.setBackgroundColor(Color.parseColor("#ffbbbb"));
+        textbox.textSize=24F;
+        layout.addView(textbox);
+
+        //Set position
+        setX(x);
+        setY(y);
+
+        //TODO: set size
+
+        //Set text
+        setText(text);
+    }
+
+    //Constructor, given just activity instance
+    constructor(activity: ComponentActivity) {
+        //Set up LinearLayout
+        layout = LinearLayout(activity);
+        layout.setOnClickListener{buttonClick()};
+
+        //Set up TextView inside LinearLayout
+        textbox = TextView(activity);
         textbox.textSize=24F;
         layout.addView(textbox);
     }
 
-    public fun setColorTo(color:String) {
-        this.color = color;
-        layout.setBackgroundColor(Color.parseColor(color));
+    public fun initDisplay(newTextView: TextView) {
+        display = Display();
+        display.init(newTextView);
     }
 
     public fun addButtonTo(root: RelativeLayout) {
         layout.setBackgroundColor(Color.parseColor(color));
         root.addView(layout);
     }
+
+
+    /*** SETTERS ***/
 
     public fun setX(x: Int) {
         layout.x = x.toFloat();
@@ -66,6 +97,13 @@ class CalcBtn {
         textbox.y = height/2F-35;
     }
 
+    public fun setText(value: String) {
+        textbox.text = value;
+    }
+
+
+    /*** GETTERS ***/
+
     public fun getX(): Int {
         return layout.x.toInt();
     }
@@ -83,13 +121,11 @@ class CalcBtn {
     }
 
     public fun getText(): String {
-        return textVal;
+        return textbox.text.toString();
     }
 
-    public fun setText(value: String) {
-        this.textVal = value;
-        textbox.text = textVal;
-    }
+
+    /*** EVENTS ***/
 
     private fun buttonDownColor() {
         if (btnDown) {
@@ -104,17 +140,7 @@ class CalcBtn {
     }
 
     private fun buttonClick() {
-        display.update(textVal)
-    }
-
-    private fun updateTextPos() {
-        textbox.x = getWidth()/2F;
-        textbox.y = getHeight()/2F;
-    }
-
-    public fun initDisplay(newTextView: TextView) {
-        display = CalcDisplay();
-        display.init(newTextView);
+        display.update(textbox.text.toString())
     }
 
 }

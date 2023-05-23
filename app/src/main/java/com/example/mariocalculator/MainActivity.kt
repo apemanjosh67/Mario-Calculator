@@ -1,28 +1,9 @@
 package com.example.mariocalculator
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import android.widget.Button;
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.mariocalculator.databinding.ActivityMainBinding
-import com.example.mariocalculator.ui.theme.MarioCalculatorTheme
-import android.graphics.Color;
-import android.graphics.Point
-import android.os.Build
-import android.util.DisplayMetrics
-import android.view.WindowManager
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 
 class MainActivity : ComponentActivity() {
 
@@ -55,10 +36,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    fun createButton(x: Int, y: Int, width: Int, height: Int, textVal: String): CalcBtn {
-        var btn = CalcBtn();
-
-        btn.initLayout(this);
+    fun createButton(x: Int, y: Int, width: Int, height: Int, textVal: String): com.example.mariocalculator.Button {
+        var btn = Button(this);
+        
         btn.addButtonTo(binding.root.findViewById(R.id.buttonPanel));
         btn.setWidth(width-border);
         btn.setHeight(height-border);
