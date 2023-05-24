@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
 
         var SIZE = 180;
         var buttonStrings = arrayOf(
-            "^", "sqrt", "(", ")",
+            "^", "ln", "(", ")",
             "sin", "cos", "tan", "AC",
             "1", "2", "3", "+",
             "4", "5", "6", "-",

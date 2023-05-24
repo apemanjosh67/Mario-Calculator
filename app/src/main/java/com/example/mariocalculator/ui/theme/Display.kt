@@ -16,4 +16,18 @@ class Display {
         var currText = textView.text.toString();
         textView.text = currText + newText;
     }
+
+    public fun clear() {
+        textView.text = "";
+    }
+
+    public fun pop(): String {
+        var expression = textView.text.toString();
+        clear();
+        return expression;
+    }
+
+    public fun set(newText: String) {
+        textView.text = newText;
+    }
 }
