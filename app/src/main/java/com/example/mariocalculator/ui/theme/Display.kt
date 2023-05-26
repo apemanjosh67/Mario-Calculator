@@ -1,5 +1,6 @@
 package com.example.mariocalculator.ui.theme
 
+import android.graphics.Color
 import android.widget.TextView
 
 class Display {
@@ -9,7 +10,8 @@ class Display {
 
     public fun init(newTextView: TextView) {
         textView = newTextView;
-        textView.textSize = 56F;
+        textView.textSize = 48F;
+        textView.setTextColor(Color.parseColor("#ffffff"));
     }
 
     public fun update(newText: String) {

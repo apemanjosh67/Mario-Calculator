@@ -1,13 +1,21 @@
 package com.example.mariocalculator
 
+import android.app.Activity
 import android.graphics.Color
+import android.graphics.Typeface
 import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.core.content.res.ResourcesCompat
 import com.example.mariocalculator.ui.theme.Display
+import java.lang.Math.cos
+import java.lang.Math.sin
+import java.lang.Math.tan
+import kotlin.math.ln
+import kotlin.math.round;
 
 class Button {
 
@@ -17,17 +25,20 @@ class Button {
     private lateinit var layout: LinearLayout;
     private lateinit var textbox: TextView;
     private lateinit var display: Display;
+    private lateinit var activity: Activity;
 
     //Button aesthetic variables
-    private var color = "#aaaaff"
-    private var downColor = "#6666ff"
+    private var color = "#eeeeff"
+    private var downColor = "#aaaaff"
     private var border = 4;
+    private var imageId = 0;
 
 
     /*** INITIALIZATION ***/
 
     //Constructor, given all properties
     constructor(activity: ComponentActivity, x: Int, y: Int, width: Int, height: Int, text: String) {
+        this.activity = activity;
         initLayout(activity);
 
         //Set position
@@ -57,7 +68,10 @@ class Button {
 
         //Set up TextView inside LinearLayout
         textbox = TextView(activity);
-        textbox.textSize=24F;
+        textbox.textSize=32F;
+        textbox.setTextColor(Color.parseColor("#ffffff"))
+        var typeface = ResourcesCompat.getFont(activity.applicationContext, R.font.mario_font);
+        textbox.setTypeface(typeface);
         layout.addView(textbox);
     }
 
@@ -67,7 +81,8 @@ class Button {
     }
 
     public fun addButtonTo(root: RelativeLayout) {
-        layout.setBackgroundColor(Color.parseColor(color));
+        //layout.setBackgroundColor(Color.parseColor(color));
+        //layout.setBackgroundResource(R.drawable.qblocksprite);
         root.addView(layout);
     }
 
@@ -87,7 +102,8 @@ class Button {
         params.width = width;
         layout.setLayoutParams(params);
 
-        textbox.x = width/2F-15;
+        //textbox.x = width/2F-15;
+        textbox.x = -200F;
     }
 
     public fun setHeight(height: Int) {
@@ -133,12 +149,14 @@ class Button {
         var item = textbox.text.toString();
 
         val NUMS = arrayOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "(", ")");
-        val OPERATIONS = arrayOf("+", "-", "*", "/", "^", "ln", "sin", "cos", "tan");
+        val OPERATIONS = arrayOf("+", "-", "*", "/", "^");
+        val FUNCTIONS = arrayOf("ln", "sin", "cos", "tan");
         val EQUALS = "=";
         val ALL_CLEAR = "AC";
 
         if (item in NUMS) display.update(item);
         else if (item in OPERATIONS) display.update(item);
+        else if (item in FUNCTIONS) display.update(item+"(")
         else if (item == ALL_CLEAR) display.clear();
         else if (item == EQUALS) display.set( evaluateEquation( display.pop() ) ); //TODO: compute answer
     }
@@ -152,10 +170,14 @@ class Button {
             MotionEvent.ACTION_DOWN -> {
                 buttonClick();
                 setColorDown();
+                //textbox.setTextColor(Color.parseColor("#dddddd"))
             }
 
             MotionEvent.ACTION_UP -> {
                 setColorUp();
+                //layout.setBackgroundResource(R.drawable.qblocksprite);
+                setBackgroundImage(imageId);
+                //textbox.setTextColor(Color.parseColor("#ffffff"))
             }
 
             MotionEvent.ACTION_MOVE -> {}
@@ -170,7 +192,7 @@ class Button {
     fun evaluateEquation(equationString: String): String {
         //assuming equation is valid
 
-        var equation = "("+equationString+")";
+        var equation = "($equationString)";
         var openIndex = 0;
         var closedIndex = 0;
         var i = 0;
@@ -181,8 +203,9 @@ class Button {
                 var substring = getSubstring(equation, openIndex, closedIndex);
                 var num = evaluateSubstring(substring);
                 equation = equation.replace(substring, num);
+                equation = checkFunctions(equation,num,openIndex);
 
-                i = -1;
+                i = 0;
                 openIndex = 0;
                 closedIndex = 0;
             }
@@ -193,10 +216,41 @@ class Button {
         return equation;
     }
 
+    fun checkFunctions(eqn:String, num:String, i: Int): String {
+
+        if (i < 3) return eqn;
+
+
+        var equation = eqn;
+        var function = equation[i-3].toString() + equation[i-2].toString() + equation[i-1].toString();
+
+        var computedValue = ""
+
+        if (function == "sin") {
+            computedValue = sin(num.toDouble()).toString();
+            equation = equation.replace(function + num, computedValue);
+        }
+        else if (function == "cos") {
+            computedValue = cos(num.toDouble()).toString();
+            equation = equation.replace(function + num, computedValue);
+        }
+        else if (function == "tan") {
+            computedValue = tan(num.toDouble()).toString();
+            equation = equation.replace(function + num, computedValue);
+        }
+        else if (function[1].toString()+function[2].toString() == "ln") {
+            computedValue = ln(num.toDouble()).toString();
+            equation = equation.replace(function[1].toString()+function[2].toString()+num, computedValue);
+        }
+
+        //return round(equation.toDouble()).toString();
+        return equation;
+    }
+
     //SUBSTRING
     fun getSubstring(str: String, i: Int, j: Int): String {
         if (i < 0 || j < 0 || j < i || i >= str.length || j >= str.length) {
-            return "";
+            return str;
         }
 
         var substring = "";
@@ -212,16 +266,7 @@ class Button {
     //only supports addition
 //TODO: add support for more operations
     fun evaluateSubstring(substring: String): String {
-//    var substring = getSubstring(substring, 1, substring.length-2);
-//    substring = substring.replace("-", "+-")
-//    var nums = substring.split("+")
-//
-//    var sum = 0;
-//    for (num in nums) {
-//        sum += num.toInt();
-//    }
-//
-//    return sum.toString();
+
         var s = getSubstring(substring, 1, substring.length-2);
         s = s.replace("-", "+-");
         if (s[0] == '+') s = "0"+s
@@ -229,23 +274,40 @@ class Button {
         //Get list of operators
         var opString = "";
         for (i in s.indices) {
-            //if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/')
-            if (s[i] == '+' || s[i] == '*' || s[i] == '/')
+            if (s[i] == '+' || s[i] == '*' || s[i] == '/' || s[i] == '^')
                 opString += s[i].toString() + " ";
         }
         opString = getSubstring(opString, 0, opString.length-2)
         var opList = opString.split(" ").toMutableList();
 
-        //Get list of numbers
-//    var nums = s.split("+", "-", "*", "/").toMutableList();
-        var nums = s.split("+", "*", "/").toMutableList();
+        if (opString == "") return s;
 
-        //evaluate multiplication or division
+        //Get list of numbers
+        var nums = s.split("+", "*", "/", "^").toMutableList();
+
+        //evaluate exponents
         var i = 0;
         while (i < opList.size) {
+            if (opList[i] == "^") {
+                var base = nums[i].toDouble();
+                var exponent = nums[i+1].toDouble();
+                var power = Math.pow(base, exponent);
+
+                nums[i] = power.toString();
+                nums.removeAt(i+1);
+                opList.removeAt(i);
+                i--;
+
+            }
+            i++;
+        }
+
+        //evaluate multiplication or division
+        i = 0;
+        while (i < opList.size) {
             if (opList[i] == "*") {
-                var factor1 = nums[i].toFloat();
-                var factor2 = nums[i+1].toFloat();
+                var factor1 = nums[i].toDouble();
+                var factor2 = nums[i+1].toDouble();
                 var product = factor1*factor2;
 
                 nums[i] = product.toString();
@@ -255,8 +317,8 @@ class Button {
 
             }
             else if (opList[i] == "/") {
-                var dividend = nums[i].toFloat();
-                var divisor = nums[i+1].toFloat();
+                var dividend = nums[i].toDouble();
+                var divisor = nums[i+1].toDouble();
                 var quotient = dividend/divisor;
 
                 nums[i] = quotient.toString();
@@ -272,8 +334,8 @@ class Button {
         i = 0;
         while (i < opList.size) {
             if (opList[i] == "+") {
-                var addend1 = nums[i].toFloat();
-                var addend2 = nums[i+1].toFloat();
+                var addend1 = nums[i].toDouble();
+                var addend2 = nums[i+1].toDouble();
                 var sum = addend1 + addend2;
 
                 nums[i] = sum.toString();
@@ -289,8 +351,9 @@ class Button {
         var answer = nums[0];
 
         //round if able
+        //answer = getSubstring(answer, 0, answer.indexOf('.')+7)
         if (answer[answer.length-2] == '.' && answer[answer.length-1] == '0')
-            return answer.toFloat().toInt().toString();
+            return answer.toDouble().toInt().toString();
         return nums[0];
     }
 
@@ -303,6 +366,11 @@ class Button {
 
     private fun setColorDown() {
         layout.setBackgroundColor(Color.parseColor(downColor));
+    }
+
+    public fun setBackgroundImage(imageId: Int) {
+        this.imageId = imageId;
+        layout.setBackgroundResource(imageId);
     }
 }
 
