@@ -9,6 +9,16 @@
     >
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+
+        android:id = "@+id/sdk"
+        />
+
+    <TextView
         android:layout_height="100dp"
         android:layout_width="match_parent"
         android:gravity="right"

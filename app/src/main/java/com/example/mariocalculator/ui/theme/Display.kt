@@ -10,7 +10,7 @@ class Display {
 
     public fun init(newTextView: TextView) {
         textView = newTextView;
-        textView.textSize = 48F;
+        textView.textSize = 42F;
         textView.setTextColor(Color.parseColor("#ffffff"));
     }
 
