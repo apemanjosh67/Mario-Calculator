@@ -1,13 +1,17 @@
 package com.example.mariocalculator
 
 import android.content.Intent
+import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import com.example.mariocalculator.databinding.ActivityMainBinding
 
 
@@ -60,8 +64,8 @@ class OverworldTheme : ComponentActivity() {
                 else if (btn.getText() == "-") btn.setBackgroundImage(R.drawable.minus_sprite);
                 else if (btn.getText() == "*") btn.setBackgroundImage(R.drawable.multiplication_sprite);
                 else if (btn.getText() == "/") btn.setBackgroundImage(R.drawable.division_sprite);
-                else if (btn.getText() == ".") btn.setBackgroundImage(R.drawable.point_sprite);
-                else if (btn.getText() == "=") btn.setBackgroundImage(R.drawable.equals_sprite)
+                else if (btn.getText() == ".") btn.setBackgroundImage(R.drawable.pointspritenew);
+                else if (btn.getText() == "=") btn.setBackgroundImage(R.drawable.equalsspritenew)
                 else if (btn.getText() == "sin") btn.setBackgroundImage(R.drawable.sinspritenew);
                 else if (btn.getText() == "cos") btn.setBackgroundImage(R.drawable.cosspritenew);
                 else if (btn.getText() == "tan") btn.setBackgroundImage(R.drawable.tanspritenew);
@@ -70,18 +74,18 @@ class OverworldTheme : ComponentActivity() {
             }
         }
 
-        //overworld
-        var owButton = findViewById<android.widget.Button>(R.id.overworld);
-        owButton.setOnClickListener{
-            val intent = Intent(this, OverworldTheme::class.java);
-            startActivity(intent);
-        };
-        //underground
-        var ugButton = findViewById<android.widget.Button>(R.id.underground);
-        ugButton.setOnClickListener{
-            val intent = Intent(this, UndergroundTheme::class.java);
-            startActivity(intent);
-        };
+//        //overworld
+//        var owButton = findViewById<android.widget.Button>(R.id.overworld);
+//        owButton.setOnClickListener{
+//            val intent = Intent(this, OverworldTheme::class.java);
+//            startActivity(intent);
+//        };
+//        //underground
+//        var ugButton = findViewById<android.widget.Button>(R.id.underground);
+//        ugButton.setOnClickListener{
+//            val intent = Intent(this, UndergroundTheme::class.java);
+//            startActivity(intent);
+//        };
         //castle
 //        var caButton = findViewById<android.widget.Button>(R.id.castle);
 //        ugButton.setOnClickListener{
@@ -95,7 +99,24 @@ class OverworldTheme : ComponentActivity() {
 //            startActivity(intent);
 //        };
 
+        var mp = MediaPlayer();
+        mp.setDataSource(resources.openRawResourceFd(R.raw.ow_song));
+        mp.prepareAsync();
+        mp.setOnPreparedListener {mp.start()};
+        mp.setOnCompletionListener {mp.start()};
+        //setErrorListener (?)
 
+        findViewById<LinearLayout>(R.id.themePanel).setOnLongClickListener{event ->
+            handleMusic(mp);
+            true;
+        };
+
+
+    }
+
+    fun handleMusic(mp: MediaPlayer) {
+        if (mp.isPlaying) mp.pause();
+        else mp.start();
     }
 
     fun createButton(x: Int, y: Int, width: Int, height: Int, textVal: String): com.example.mariocalculator.Button {
