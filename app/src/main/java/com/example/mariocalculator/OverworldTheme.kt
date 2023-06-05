@@ -1,23 +1,17 @@
 package com.example.mariocalculator
 
-import android.content.Context
-import android.hardware.display.DisplayManager
-import android.media.MediaPlayer
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.Display
-import android.view.WindowManager
-import android.widget.TextView
+import android.view.View
+import android.widget.RelativeLayout
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
-import androidx.core.text.isDigitsOnly
 import com.example.mariocalculator.databinding.ActivityMainBinding
-import androidx.window.layout.WindowMetricsCalculator
-import androidx.window.layout.WindowMetrics
 
 
-class MainActivity : ComponentActivity() {
+class OverworldTheme : ComponentActivity() {
 
     lateinit var binding: ActivityMainBinding;
     var border = 10;
@@ -28,6 +22,13 @@ class MainActivity : ComponentActivity() {
         setContentView(binding.root);
 
         var SIZE = getScreenWidth()/4;
+
+        var btnPanel = findViewById<RelativeLayout>(R.id.buttonPanel);
+        var params = btnPanel.layoutParams;
+        params.width = SIZE*4;
+        params.height = SIZE*6;
+        btnPanel.layoutParams = params;
+
         var buttonStrings = arrayOf(
             "^", "ln", "(", ")",
             "sin", "cos", "tan", "AC",
@@ -69,8 +70,31 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        var sdkView = findViewById<TextView>(R.id.sdk);
-        sdkView.text = getScreenWidth().toString();
+        //overworld
+        var owButton = findViewById<android.widget.Button>(R.id.overworld);
+        owButton.setOnClickListener{
+            val intent = Intent(this, OverworldTheme::class.java);
+            startActivity(intent);
+        };
+        //underground
+        var ugButton = findViewById<android.widget.Button>(R.id.underground);
+        ugButton.setOnClickListener{
+            val intent = Intent(this, UndergroundTheme::class.java);
+            startActivity(intent);
+        };
+        //castle
+//        var caButton = findViewById<android.widget.Button>(R.id.castle);
+//        ugButton.setOnClickListener{
+//            val intent = Intent(this, CastleTheme::class.java);
+//            startActivity(intent);
+//        };
+        //underwater
+//        var uwButton = findViewById<android.widget.Button>(R.id.underwater);
+//        ugButton.setOnClickListener{
+//            val intent = Intent(this, UnderwaterTheme::class.java);
+//            startActivity(intent);
+//        };
+
 
     }
 

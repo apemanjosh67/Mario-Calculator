@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/ow_background"
+    android:background="@color/ug_background"
 
     android:id="@+id/root"
     android:orientation="vertical"
@@ -51,25 +51,25 @@
         <Button
             android:layout_height="80dp"
             android:layout_width="80dp"
-            android:background="@drawable/__1"
+            android:text="over world"
             android:id="@+id/overworld"
             ></Button>
         <Button
             android:layout_height="80dp"
             android:layout_width="80dp"
-            android:background="@drawable/__2ug"
+            android:text="under ground"
             android:id="@+id/underground"
             ></Button>
         <Button
             android:layout_height="80dp"
             android:layout_width="80dp"
-            android:background="@drawable/__4"
+            android:text="bowser castle"
             android:id="@+id/castle"
             ></Button>
         <Button
             android:layout_height="80dp"
             android:layout_width="80dp"
-            android:background="@drawable/__2"
+            android:text="under water"
             android:id="@+id/underwater"
             ></Button>
 

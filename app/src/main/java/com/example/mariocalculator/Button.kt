@@ -29,7 +29,7 @@ class Button {
 
     //Button aesthetic variables
     private var color = "#eeeeff"
-    private var downColor = "#aaaaff"
+    private var downColor = "#00aaaaff"
     private var border = 4;
     private var imageId = 0;
 
