@@ -18,6 +18,7 @@ Some sample screenshots of the app running on a Samsung S20 phone:
 There are multiple ways you can install the app:
 ## 1. Google Play Store  <img src="https://img.freepik.com/free-icon/google-play_318-566073.jpg" height="25px"/>
 &nbsp;&nbsp;&nbsp;&nbsp;App will soon be published on the Google Play Store, where you can download from there<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;*link to Google Play Store*<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;*screenshot of Google Play Store*<br><br>
 ## 2. My website
 &nbsp;&nbsp;&nbsp;&nbsp;App will soon be hosted on my website, from which you can directly download the APK<br><br>
