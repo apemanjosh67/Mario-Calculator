@@ -1,7 +1,13 @@
 # Super Mario Bros. Calculator
 *information*<br>
 *link to YouTube preview*<br>
-*screenshots*
+
+<div align="left">
+<!--<img src="readres/1.jpg" alt="screenshot of app" width="150px" style="display:inline-block;"/>-->
+<img src="readres/3.jpg" alt="screenshot of app" width="150px" style="display:inline-block"/>
+<img src="readres/2.jpg" alt="screenshot of app" width="150px" style="display:inline-block"/>
+<img src="readres/4.jpg" alt="screenshot of app" width="150px" style="display:inline-block"/>
+</div>
 
 # Installation
 There are multiple ways you can install the app:
