@@ -4,7 +4,7 @@ Mario games were a large part of my childhood, so I thought nothing would be coo
 The code for the app was written in Kotlin, and was made using JetBrain's Android Studio IDE. In terms of functionality, the calculator can perform floating-point addition, subtraction, multiplication, division, with support for parentheses and order-of-operations. It can also calculate exponents, primary trigonometric functions, and the natural logarithm. As such, the calculator can be used to compute any elementary mathematical operation or function.<br><br>
 
 Here is a video showcasing the app in action:<br>
-*link to YouTube preview*<br>
+<a href="https://youtu.be/BatlEBHACFI" target="blank">https://youtu.be/BatlEBHACFI</a><br>
 
 Some sample screenshots of the app running on a Samsung S20 phone:
 <div align="left">
