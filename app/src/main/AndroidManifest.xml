@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
 
     <application
         android:allowBackup="true"
@@ -13,16 +14,7 @@
         android:theme="@style/Theme.MarioCalculator"
         tools:targetApi="31">
         <activity
-            android:name=".UnderwaterTheme"
-            android:exported="false" />
-        <activity
-            android:name=".CastleTheme"
-            android:exported="false" />
-        <activity
-            android:name=".UndergroundTheme"
-            android:exported="false" />
-        <activity
-            android:name=".OverworldTheme"
+            android:name="jmuszka.apps.mariocalculator.OverworldTheme"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MarioCalculator">

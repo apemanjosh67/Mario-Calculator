@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace 'com.example.mariocalculator'
+    namespace 'jmuszka.apps.mariocalculator'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.mariocalculator"
+        applicationId "jmuszka.apps.mariocalculator"
         minSdk 24
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "0.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
