@@ -102,8 +102,9 @@ class OverworldTheme : ComponentActivity() {
         var mp = MediaPlayer();
         mp.setDataSource(resources.openRawResourceFd(R.raw.ow_song));
         mp.prepareAsync();
-        mp.setOnPreparedListener {mp.start()};
+        //mp.setOnPreparedListener {mp.start()};
         mp.setOnCompletionListener {mp.start()};
+        mp.setScreenOnWhilePlaying(true)
         //setErrorListener (?)
 
         findViewById<LinearLayout>(R.id.themePanel).setOnLongClickListener{event ->

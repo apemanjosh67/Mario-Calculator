@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.mariocalculator.ui.theme.Display
+import java.lang.Math.abs
 import java.lang.Math.cos
 import java.lang.Math.sin
 import java.lang.Math.tan
@@ -158,7 +159,9 @@ class Button {
         else if (item in OPERATIONS) display.update(item);
         else if (item in FUNCTIONS) display.update(item+"(")
         else if (item == ALL_CLEAR) display.clear();
-        else if (item == EQUALS) display.set( evaluateEquation( display.pop() ) ); //TODO: compute answer
+        else if (item == EQUALS) {
+            display.set( evaluateEquation( display.pop() ) )
+        }; //TODO: compute answer
     }
 
     //Change button color when down or up
@@ -191,18 +194,20 @@ class Button {
     /*** CALCULATE ***/
     fun evaluateEquation(equationString: String): String {
         //assuming equation is valid
+        if (equationString == null) return "";
 
         var equation = "($equationString)";
         var openIndex = 0;
         var closedIndex = 0;
         var i = 0;
         while ("(" in equation && ")" in equation) {
+
             if (equation[i] == '(') openIndex = i;
             else if (equation[i] == ')') {
                 closedIndex = i;
                 var substring = getSubstring(equation, openIndex, closedIndex);
                 var num = evaluateSubstring(substring);
-                equation = equation.replace(substring, num);
+                equation = equation.replace(substring, num); //"(3*-1)"
                 equation = checkFunctions(equation,num,openIndex);
 
                 i = 0;
@@ -228,22 +233,38 @@ class Button {
 
         if (function == "sin") {
             computedValue = sin(num.toDouble()).toString();
+            if (abs(0-computedValue.toDouble()) < 0.001) computedValue =  "0";
+            else if (1-computedValue.toDouble() < 0.001 && 1-computedValue.toDouble() > -0.001) computedValue =  "1";
+            else if (-1-computedValue.toDouble() < 0.001 && -1-computedValue.toDouble() > -0.001) computedValue =  "-1";
+
             equation = equation.replace(function + num, computedValue);
         }
         else if (function == "cos") {
             computedValue = cos(num.toDouble()).toString();
+            if (abs(0-computedValue.toDouble()) < 0.001) computedValue = "0";
+            else if (1-computedValue.toDouble() < 0.001 && 1-computedValue.toDouble() > -0.001) computedValue =  "1";
+            else if (-1-computedValue.toDouble() < 0.001 && -1-computedValue.toDouble() > -0.001) computedValue =  "-1";
+
             equation = equation.replace(function + num, computedValue);
         }
         else if (function == "tan") {
             computedValue = tan(num.toDouble()).toString();
+            if (abs(0-computedValue.toDouble()) < 0.001) computedValue =  "0";
+            else if (1-computedValue.toDouble() < 0.001 && 1-computedValue.toDouble() > -0.001) computedValue =  "1";
+            else if (-1-computedValue.toDouble() < 0.001 && -1-computedValue.toDouble() > -0.001) computedValue =  "-1";
+
             equation = equation.replace(function + num, computedValue);
         }
         else if (function[1].toString()+function[2].toString() == "ln") {
             computedValue = ln(num.toDouble()).toString();
+            if (abs(0-computedValue.toDouble()) < 0.001) computedValue =  "0";
+            else if (1-computedValue.toDouble() < 0.001 && 1-computedValue.toDouble() > -0.001) computedValue =  "1";
+            else if (-1-computedValue.toDouble() < 0.001 && -1-computedValue.toDouble() > -0.001) computedValue =  "-1";
+
             equation = equation.replace(function[1].toString()+function[2].toString()+num, computedValue);
         }
 
-        //return round(equation.toDouble()).toString();
+
         return equation;
     }
 
@@ -268,8 +289,9 @@ class Button {
     fun evaluateSubstring(substring: String): String {
 
         var s = getSubstring(substring, 1, substring.length-2);
-        s = s.replace("-", "+-");
-        if (s[0] == '+') s = "0"+s
+        //s = s.replace("-", "+-");
+        s = calcReplace(s);
+        if (s[0] == '+' || s[0] == '-') s = "0"+s
 
         //Get list of operators
         var opString = "";
@@ -306,6 +328,7 @@ class Button {
         i = 0;
         while (i < opList.size) {
             if (opList[i] == "*") {
+
                 var factor1 = nums[i].toDouble();
                 var factor2 = nums[i+1].toDouble();
                 var product = factor1*factor2;
@@ -334,6 +357,7 @@ class Button {
         i = 0;
         while (i < opList.size) {
             if (opList[i] == "+") {
+
                 var addend1 = nums[i].toDouble();
                 var addend2 = nums[i+1].toDouble();
                 var sum = addend1 + addend2;
@@ -344,6 +368,18 @@ class Button {
                 i--;
 
             }
+//        else if (opList[i] == "-") {
+//
+//            var minuend = nums[i].toDouble();
+//            var subtrahend = nums[i+1].toDouble();
+//            var difference = minuend - subtrahend;
+//
+//            nums[i] = difference.toString();
+//            nums.removeAt(i+1);
+//            opList.removeAt(i);
+//            i--;
+//
+//        }
 
             i++;
         }
@@ -352,11 +388,31 @@ class Button {
 
         //round if able
         //answer = getSubstring(answer, 0, answer.indexOf('.')+7)
+        if (answer.length < 2) return answer;
         if (answer[answer.length-2] == '.' && answer[answer.length-1] == '0')
             return answer.toDouble().toInt().toString();
-        return nums[0];
+        return answer;
     }
 
+    private fun calcReplace(s: String): String {
+        var str = s;
+        for (i in str.indices) {
+            if (i == 0) {
+                if (str[i] == '-') str = "0+" + str;
+            }
+            else {
+
+                if (s[i] == '-') {
+
+                    if (s[i-1].toString().toIntOrNull() != null) {
+                        str = getSubstring(s, 0, i-1) + "+-" + getSubstring(s, i+1, s.length-1);
+                    }
+                }
+            }
+
+        }
+        return str;
+    }
 
     /*** CHANGE COLORS ***/
 
