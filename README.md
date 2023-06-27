@@ -26,8 +26,8 @@ There are multiple ways you can install the app:
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jmuszka.com/calculator" target="blank">jmuszka.com/calculator</a><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<img src="https://github.com/apemanjosh67/Mario-Calculator/blob/master/readres/Screenshot%20from%202023-06-06%2001-32-57.png?raw=true" width="400px"/><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;Click <a href="https://www.androidauthority.com/how-to-install-apks-31494/" target="blank">here</a> for a tutorial for manually installing APK files, if you are unfamiliar with how to do so.<br><br>
-## 3. APKMirror <img src="https://downloadr2.apkmirror.com/wp-content/uploads/2020/08/55/5f42eaaa4945c.png" height="25px"/>
-&nbsp;&nbsp;&nbsp;&nbsp;App will soon be uploaded on APKMirror, from which you can directly download the APK<br><br>
+## 3. F-Droid <img src="https://f-droid.org/assets/fdroid-logo_bfHl7nsLHOUQxzdU8-rGIhn4bAgl6z7k2mA3fWoCyT4=.png" height="25px"/>
+&nbsp;&nbsp;&nbsp;&nbsp;App will soon be uploaded on F-Droid, from which you can directly download the APK<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;*link to website*<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;*screenshot of website*<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;Click <a href="https://www.androidauthority.com/how-to-install-apks-31494/" target="blank">here</a> for a tutorial for manually installing APK files, if you are unfamiliar with how to do so.<br><br>
