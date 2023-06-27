@@ -18,10 +18,10 @@ Some sample screenshots of the app running on a Samsung S20 phone:
 There are multiple ways you can install the app:
 ## 1. Google Play Store  <img src="https://img.freepik.com/free-icon/google-play_318-566073.jpg" height="25px"/>
 &nbsp;&nbsp;&nbsp;&nbsp;App will soon be published on the Google Play Store, where you can download from there<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;*link to Google Play Store*<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://play.google.com/store/apps/details?id=jmuszka.apps.mariocalculator&hl=en&gl=US" target="blank">https://play.google.com/store/apps/details?id=jmuszka.apps.mariocalculator&hl=en&gl=US</a><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;*screenshot of Google Play Store*<br><br>
 ## 2. My website
-&nbsp;&nbsp;&nbsp;&nbsp;App will soon be hosted on my website, from which you can directly download the APK<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;App is hosted on my website, from which you can directly download the APK<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;Here is a link to the download page:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jmuszka.com/calculator" target="blank">jmuszka.com/calculator</a><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<img src="https://github.com/apemanjosh67/Mario-Calculator/blob/master/readres/Screenshot%20from%202023-06-06%2001-32-57.png?raw=true" width="400px"/><br><br>
