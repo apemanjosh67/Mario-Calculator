@@ -23,7 +23,7 @@ There are multiple ways you can install the app:
 ## 2. My website
 &nbsp;&nbsp;&nbsp;&nbsp;App is hosted on my website, from which you can directly download the APK<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;Here is a link to the download page:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jmuszka.com/calculator" target="blank">jmuszka.com/calculator</a><br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://calculator.jmuszka.com/calculator" target="blank">calculator.jmuszka.com/calculator</a><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<img src="https://github.com/apemanjosh67/Mario-Calculator/blob/master/readres/Screenshot%20from%202023-06-06%2001-32-57.png?raw=true" width="400px"/><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;Click <a href="https://www.androidauthority.com/how-to-install-apks-31494/" target="blank">here</a> for a tutorial for manually installing APK files, if you are unfamiliar with how to do so.<br><br>
 ## 3. F-Droid <img src="https://f-droid.org/assets/fdroid-logo_bfHl7nsLHOUQxzdU8-rGIhn4bAgl6z7k2mA3fWoCyT4=.png" height="25px"/>
